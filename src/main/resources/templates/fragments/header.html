@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+  <link href="css/Style.css" rel="stylesheet" />
+  <link rel="stylesheet" th:href="@{/lib/dist/bootstrap/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/lib/font-awesome/css/font-awesome.css}" />
+</head>
+<body>
+<header th:fragment="header()">
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3 header">
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active Font" th:href="@{/}">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active Font" th:href="@{/product/brands}">Бренды</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active Font" th:href="@{/product/products}">Каталог</a>
+        </li>
+
+        <li class="nav-item" sec:authorize="isAuthenticated()">
+          <a class="nav-link active Font" th:href="@{/order/orderList}">Список Заказов</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active Font" th:href="@{/cart/cartIndex}">Корзина</a>
+        </li>
+
+
+        <li class="nav-item" sec:authorize="!isAuthenticated()">
+          <a class="nav-link active Font" th:href="@{/auth/login}">Вхід</a>
+        </li>
+        <li class="nav-item" sec:authorize="isAuthenticated()">
+          <a class="nav-link active Font" th:href="@{/auth/logout}">Вихід</a>
+        </li>
+
+      </ul>
+      <a class="navbar-brand d-flex justify-content-center Font" th:href="@{/}">Парфюмерный Магазин</a>
+    </div>
+  </nav>
+</header>
+</body>
+</html>

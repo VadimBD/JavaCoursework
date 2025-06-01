@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<body>
+<th:block th:fragment="productFragment (product)">
+  <div>
+    <div class="ProductBox"     style="border: 2px solid black; margin: 0px 5px 0px 5px;">
+
+      <img class="Image" th:src="${product}" style="margin-top: 4px; margin-left: 3px;" />
+
+
+      <span>Perfume:</span>
+      <a th:href="@{/product/products/{id}(id=${product.id})}" th:text="${product.brand.name} + ' ' + ${product.name}">Product Name</a>
+
+
+      <p>Price: <span th:text="${product.price}">Price</span></p>
+
+
+      <p>Container: <span th:text="${product.container.displayName}">Container Name</span></p>
+    </div>
+  </div>
+</th:block>
+</body>
+</html>

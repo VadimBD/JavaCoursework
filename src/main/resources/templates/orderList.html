@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Orders</title>
+    <link rel="stylesheet" type="text/css" href="css/Style.css">
+    <style>
+        .Font {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header()"></div>
+<div class="container">
+    <h1 class="Font">Orders:</h1>
+
+    <div th:each="item : ${orders}" class="row">
+        <div class="row OrderListItem Font">
+            <h3 class="col-sm-1 Font" th:text="${item.orderNumber}"></h3>
+            <p class="col-sm-4 Font"> OrderDate: <span th:text="${#dates.format(item.orderDate, 'yyyy-MM-dd')}"></span></p>
+            <p class="col-sm-3 Font"> OrderStatus: <span th:text="${item.orderStatus}"></span></p>
+            <p class="col-sm-4 Font"> Total: <span th:text="${item.total}"></span></p>
+        </div>
+        <a class="Font" style="text-align:end" th:href="@{/orderDetails(orderId=${item.id})}"> Details </a>
+    </div>
+</div>
+</body>
+</html>

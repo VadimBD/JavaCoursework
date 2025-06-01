@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pagination Fragment</title>
+</head>
+<body>
+<ul class="pagination">
+    <li th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
+        th:classappend="${pageNum == currentPage} ? 'btn-primary' : 'btn-default'">
+        <a th:href="@{'/products'(page=${pageNum})}" th:text="${pageNum}">1</a>
+    </li>
+</ul>
+</body>
+</html>

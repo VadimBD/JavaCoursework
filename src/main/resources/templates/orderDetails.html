@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Order Details</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header()"></div>
+<div style="padding-left:15px;">
+  <h1> Order Number: <span th:text="${order.orderNumber}"></span></h1>
+  <h2> Order Date: <span th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd')}"></span></h2>
+  <h2> Total: <span th:text="${order.total}"></span> $</h2>
+  <h2>Products:</h2>
+  <div th:each="item : ${order.lines}" style="display:flex;">
+    <div style="display:flex; flex-direction:column">
+      <img th:src="@{${item.product.image}}" alt="Product Image"/>
+      <p><span th:text="${item.product.name}"></span> : <span th:text="${item.product.price}"></span></p>
+      <p> Quantity: <span th:text="${item.quantity}"></span></p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
