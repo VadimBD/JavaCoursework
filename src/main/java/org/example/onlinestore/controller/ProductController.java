@@ -2,15 +2,13 @@ package org.example.onlinestore.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.example.onlinestore.entity.Brand;
+import org.example.onlinestore.entity.Review;
 import org.example.onlinestore.viewmodels.PagingInfoVM;
 import org.example.onlinestore.viewmodels.ProductListViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.example.onlinestore.utils.Utils;
 import org.example.onlinestore.service.ProductService;
@@ -19,8 +17,9 @@ import org.example.onlinestore.enums.ProductType;
 import org.example.onlinestore.enums.Gender;
 
 
-
+import java.rmi.server.UID;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/product")
@@ -94,5 +93,13 @@ public class ProductController {
         Iterable<Brand> brands = productService.getAllBrands();
         mav.addObject("brands", brands);
         return mav;
+    }
+
+    @PostMapping("/addReview")
+    public String addReview( @RequestParam("reviewText") String text, @RequestParam("productId") int productId,HttpServletRequest request) {
+
+        UUID userId= UUID.fromString(utils.getCurrentUserId(request));
+        productService.addReview(text,productId,userId);
+        return String.format("redirect:/product/products/%s",productId);
     }
 }

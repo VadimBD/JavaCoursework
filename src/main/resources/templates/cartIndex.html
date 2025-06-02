@@ -26,9 +26,8 @@
             <td class="text-end" th:text="${#numbers.formatCurrency(line.product.price)}">$0.00</td>
             <td class="text-end" th:text="${#numbers.formatCurrency(line.product.price*line.getQuantity())}">$0.00</td>
             <td>
-                <form th:action="@{/cart/removeFrom}" method="post">
-                    <input type="hidden" name="productId" th:value="${line.product.id}" />
-                    <input type="hidden" name="returnUrl" th:value="${cartIndexViewModel.getReturnUrl()}" />
+                <form th:action="@{/cart/remove}" method="post">
+                    <input type="hidden" name="id" th:value="${line.product.id}" />
                     <button type="submit" class="btn btn-sm btn-danger" >Remove</button>
                 </form>
             </td>

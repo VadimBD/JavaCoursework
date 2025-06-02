@@ -10,6 +10,8 @@ import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.Nationalized;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Getter
@@ -33,7 +35,7 @@ public class Review {
     private String reviewText;
 
     @Column(name = "IsertedDate", nullable = false)
-    private Instant isertedDate;
+    private OffsetDateTime isertedDate;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

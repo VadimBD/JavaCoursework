@@ -26,6 +26,7 @@ import java.util.UUID;
 public class Order {
     @Id
     @Column(name = "Id", nullable = false)
+    @GeneratedValue
     private UUID id;
 
     @Column(name = "UserId", nullable = false)

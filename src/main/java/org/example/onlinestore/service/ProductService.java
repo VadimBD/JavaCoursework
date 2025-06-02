@@ -10,13 +10,18 @@ import org.example.onlinestore.repository.BrandRepository;
 import org.example.onlinestore.repository.ProductContainerRepository;
 import org.example.onlinestore.repository.ProductRepository;
 import org.example.onlinestore.repository.ReviewRepository;
+import org.example.onlinestore.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 
@@ -33,11 +38,14 @@ public class ProductService {
     @Autowired
     private ProductContainerRepository productContainerRepository;
 
+    private Utils utils;
+
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
     public Product getProduct(int id) {
-        return productRepository.findById(id).get();
+        var p=productRepository.findById(id);
+         return p!=null?p.get():null;
     }
 
     public List<ProductContainer> getAllProductContainers() {
@@ -91,6 +99,16 @@ public class ProductService {
         var copy = new ArrayList<Product>(list);
         Collections.shuffle(copy);
         return copy.subList(0, Math.min(count, copy.size()));
+    }
+
+    public  void addReview(String text, int productId, UUID userId){
+        var review = new Review();
+        var time=OffsetDateTime.ofInstant(Instant.now(), ZoneOffset.UTC);
+        review.setProduct(getProduct(productId));
+        review.setReviewText(text);
+        review.setUserId(userId);
+        review.setIsertedDate(time);
+        reviewRepository.save(review);
     }
 
 

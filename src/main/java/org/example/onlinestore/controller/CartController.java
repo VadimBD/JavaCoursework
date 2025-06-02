@@ -37,14 +37,14 @@ public class CartController {
         }
         return String.format("redirect:%s", returnUrl);
     }
-    @PostMapping("/removeFrom")
-    public String RemoveFromCart(@RequestParam("id") int id, @RequestParam("returnUrl") String returnUrl,HttpServletRequest request) {
+    @PostMapping("/remove")
+    public String RemoveFromCart(@RequestParam("id") int id, HttpServletRequest request) {
         Product product = productService.getProduct(id);
         var cart=SessionCart.getCart(request);
         if (product != null)
         {
             cart.removeLine(product);
         }
-        return String.format("redirect:%s", returnUrl);
+        return"redirect:/cart/cartIndex";
     }
 }

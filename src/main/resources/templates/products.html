@@ -11,14 +11,6 @@
             <div th:include="::productFragment"></div>
         </th:block>
     </div>
-
-    <div th:if="${productsVM.pagingInfo.totalItems > productsVM.pagingInfo.itemsPerPage}">
-        <div th:fragment="paginationFragment"
-             th:page="${productsVM.pagingInfo.currentPage}"
-             th:totalPages="${productsVM.pagingInfo.totalPages}"
-             th:classAppend="btn">
-        </div>
-    </div>
 </div>
 </body>
 </html>

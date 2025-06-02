@@ -30,13 +30,14 @@
     </form>
   </div>
 
-  <form th:action="@{/reviews/add}" method="post">
+  <form th:action="@{/product/addReview}" method="post">
     <div>
-      <input type="hidden" name="productId" th:value="${product.id}" />
-      <label for="newReview">Enter Review</label>
-      <input type="text" id="newReview" name="newReview" placeholder="Write your review here..." />
+      <input type="hidden" name="productId" th:value="${product.id}"/>
+      <label for="reviewText">Enter Review</label>
+      <input type="text" id="reviewText" name="reviewText" placeholder="Write your review here..." />
+      <button type="submit" class="btn btn-primary">Add Review</button>
     </div>
-    <button type="submit" class="btn btn-primary">Add Review</button>
+
   </form>
 
   <div th:each="review : ${ product.getReviews()}">

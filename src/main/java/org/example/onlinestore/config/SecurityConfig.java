@@ -15,8 +15,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/public", "/swagger-ui/**", "/auth/login", "/product/**", "/cart/**","/product/**/**").permitAll()
-                        .requestMatchers( "/order/**").authenticated()
+                        .requestMatchers( "/order/**","/product/addReview").authenticated()
+                        .requestMatchers("/**").permitAll()
                 )
                 .formLogin(form -> form.disable()) // отключаем стандартную форму логина
                 .oauth2Login(Customizer.withDefaults()); // используем OAuth2 (например, через Keycloak)

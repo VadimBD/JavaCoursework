@@ -1,6 +1,7 @@
 package org.example.onlinestore.viewmodels;
 
 import lombok.Getter;
+import org.example.onlinestore.entity.CartLine;
 import org.example.onlinestore.entity.Order;
 import org.example.onlinestore.enums.ShippingType;
 import org.example.onlinestore.model.SelectListItem;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 @Getter
 public class OrderViewModel {
     public Order order ;
+    public List<CartLine> cartLines;
     public Iterable<SelectListItem> shippingTypeSLI ;
     public OrderViewModel(Order order) {
         this.order = order;
